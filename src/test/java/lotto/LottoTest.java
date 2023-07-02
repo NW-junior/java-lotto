@@ -37,6 +37,34 @@ class LottoTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("로또 번호가 일치하는 갯수를 계산한다.")
+    @Test
+    void calculateSameNumberCount() {
+        // given
+        Lotto lotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 45)));
+        Lotto anotherLotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 45)));
+
+        // when
+        int count = lotto.countSameNumber(anotherLotto);
+
+        // then
+        assertThat(count).isEqualTo(6);
+    }
+
+    @DisplayName("로또 번호가 일치하는 갯수를 계산한다.2")
+    @Test
+    void calculateSameNumberCount2() {
+        // given
+        Lotto lotto = new Lotto(createLottoNumbers(List.of(3, 5, 6, 8, 11, 45)));
+        Lotto anotherLotto = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 45)));
+
+        // when
+        int count = lotto.countSameNumber(anotherLotto);
+
+        // then
+        assertThat(count).isEqualTo(3);
+    }
+
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
         return numbers.stream()
             .map(LottoNumber::new)

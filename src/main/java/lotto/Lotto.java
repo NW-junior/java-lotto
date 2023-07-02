@@ -33,5 +33,11 @@ public class Lotto {
             .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
+    public int countSameNumber(Lotto anotherLotto) {
+        return (int)this.numbers.stream()
+            .filter(anotherLotto::hasNumber)
+            .count();
+    }
+
     // TODO: 추가 기능 구현
 }
