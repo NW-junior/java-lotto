@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoNumber {
     private static final int MIN_NUMBER_VALUE = 1;
     private static final int MAX_NUMBER_VALUE = 45;
@@ -24,5 +26,22 @@ public class LottoNumber {
 
     private boolean isInValidRangeNumber(Integer number) {
         return MIN_NUMBER_VALUE > number || number > MAX_NUMBER_VALUE;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        LottoNumber that = (LottoNumber)o;
+        return Objects.equals(number, that.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(number);
     }
 }
