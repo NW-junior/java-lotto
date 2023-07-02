@@ -9,6 +9,17 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class LottoNumberTest {
 
+    @DisplayName("로또 번호를 생성한다.")
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3, 35, 45})
+    void createLottoNumber(Integer number) {
+        // when
+        LottoNumber lottoNumber = new LottoNumber(number);
+
+        // then
+        assertThat(lottoNumber).isNotNull();
+    }
+
     @DisplayName("로또 번호가 null이면 예외를 발생한다.")
     @ParameterizedTest
     @NullSource
