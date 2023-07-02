@@ -28,5 +28,10 @@ public class Lotto {
         }
     }
 
+    public boolean hasNumber(LottoNumber bonusNumber) {
+        return numbers.stream()
+            .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
+    }
+
     // TODO: 추가 기능 구현
 }
