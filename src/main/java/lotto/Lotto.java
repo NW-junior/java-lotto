@@ -16,5 +16,15 @@ public class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
+    public Reward draw(List<Integer> luckyNumber) {
+        List<Integer> onlyNumber = luckyNumber.subList(0, 6);
+        Integer bonusNUmber = luckyNumber.get(6);
+
+        int correctCount = Math.toIntExact(numbers.stream()
+                .filter(onlyNumber::contains)
+                .count());
+        boolean hasBonus = numbers.contains(bonusNUmber);
+
+        return Reward.getRewardByCorrectCount(correctCount, hasBonus);
+    }
 }
