@@ -12,7 +12,7 @@ public class LottoCalculatorTest {
     @DisplayName("투자금과 수익금에 따라 수익률을 올바르게 계산하는지 테스트")
     @Test
     void calculateEarningRate() {
-        Long insertedCoin = 2000L;
+        BigDecimal insertedCoin = new BigDecimal(2000);
         List<Reward> rewardList = List.of(Reward.FIFTH, Reward.FIFTH);
         LottoCalculator lottoCalculator = new LottoCalculator();
 

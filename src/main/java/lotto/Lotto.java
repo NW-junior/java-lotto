@@ -23,15 +23,28 @@ public class Lotto {
         }
     }
 
-    public Reward draw(List<Integer> luckyNumber) {
-        List<Integer> onlyNumber = luckyNumber.subList(0, 6);
-        Integer bonusNUmber = luckyNumber.get(6);
-
+    public Reward draw(List<Integer> luckyNumber, Integer bonusNumber) {
         int correctCount = Math.toIntExact(numbers.stream()
-                .filter(onlyNumber::contains)
+                .filter(luckyNumber::contains)
                 .count());
-        boolean hasBonus = numbers.contains(bonusNUmber);
+        boolean hasBonus = numbers.contains(bonusNumber);
 
         return Reward.getRewardByCorrectCount(correctCount, hasBonus);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder lotteryPrinter = new StringBuilder();
+        List<String> stringNumberList = numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
+
+        lotteryPrinter.append("[");
+
+        lotteryPrinter.append(String.join(", ", stringNumberList));
+
+        lotteryPrinter.append("]");
+
+        return lotteryPrinter.toString();
     }
 }

@@ -28,9 +28,9 @@ class LottoTest {
     @Test
     void returnCorrectRank() {
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
-        List<Integer> luckyNumber = List.of(1, 2, 3, 4, 5, 6, 7);
+        List<Integer> luckyNumber = List.of(1, 2, 3, 4, 5, 6);
 
-        Reward result = lotto.draw(luckyNumber);
+        Reward result = lotto.draw(luckyNumber, 7);
 
         assertEquals(result, Reward.SECOND);
     }

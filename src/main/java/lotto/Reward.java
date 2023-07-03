@@ -23,27 +23,25 @@ public enum Reward {
         this.bonus = bonus;
     }
 
-    public static Reward getRewardByCorrectCount(int correctCount, boolean bonus) {
-        return Arrays.stream(Reward.values())
-                .filter(reward ->
-                        (reward.correctCount == correctCount) &&
-                                (bonus)
-                )
-                .findFirst()
-                .orElse(FAIL);
+    public static Reward getRewardByCorrectCount(int correctCount, boolean hasBonus) {
+        if (hasBonus && correctCount == 5) {
+            return SECOND;
+        } else {
+            return Arrays.stream(Reward.values())
+                    .filter(reward -> reward.correctCount == correctCount)
+                    .findAny()
+                    .orElse(FAIL);
+        }
     }
 
-    public int getCorrectCount() {
-        return correctCount;
+    public boolean isDisplayed() {
+        return this != FAIL;
     }
 
     public BigDecimal getPrizeWon() {
         return prizeWon;
     }
 
-    public String displayMoney() {
-        return displayMoney;
-    }
 
     @Override
     public String toString() {
