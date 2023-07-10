@@ -1,5 +1,6 @@
-package lotto;
+package lotto.domain;
 
+import static lotto.domain.Ranking.*;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
@@ -35,6 +36,24 @@ public class WinningLottoTest {
         // then
         assertThatThrownBy(() -> new WinningLotto(lottoNumbers, bonusNumber))
             .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("로또와 보너스 번호를 받아 당첨 등수를 계산한다.")
+    @Test
+    void calculateRanking() {
+        // given
+        Lotto winningLottoNumbers = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumber winningBonusNumber = new LottoNumber(7);
+        WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, winningBonusNumber);
+
+        Lotto lottoNumbers = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
+        LottoNumber bonusNumber = new LottoNumber(7);
+
+        // when
+        Ranking ranking = winningLotto.calculateRanking(lottoNumbers, bonusNumber);
+
+        // then
+        assertThat(ranking).isEqualTo(ONE);
     }
 
     private List<LottoNumber> createLottoNumbers(List<Integer> numbers) {
