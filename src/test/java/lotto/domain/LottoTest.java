@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.vo.LottoNumber;
+
 class LottoTest {
 
     @DisplayName("로또를 생성한다.")

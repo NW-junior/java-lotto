@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.vo.LottoNumber;
+
 class WinningLotto {
 
     private final Lotto winningLottoNumbers;

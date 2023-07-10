@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.vo.LottoNumber;
+
 class LottoTicketTest {
 
     @DisplayName("입력받은 숫자만큼 로또를 발행한다")

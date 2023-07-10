@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import lotto.domain.vo.LottoNumber;
+
 public class WinningLottoTest {
 
     @DisplayName("로또와 보너스 번호를 받아 당첨 로또를 생성한다.")

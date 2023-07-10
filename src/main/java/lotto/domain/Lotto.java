@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
+import lotto.domain.vo.LottoNumber;
+
 public class Lotto {
     private static final int LOTTO_NUMBERS_SIZE = 6;
     private static final List<LottoNumber> CACHE_LOTTO_NUMBERS;
@@ -55,5 +57,4 @@ public class Lotto {
             .count();
     }
 
-    // TODO: 추가 기능 구현
 }
