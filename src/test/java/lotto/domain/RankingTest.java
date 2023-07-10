@@ -11,6 +11,8 @@ class RankingTest {
     @DisplayName("같은 로또 번호 갯수와 보너스 번호가 맞는지에 따라 랭킹을 계산한다.")
     @ParameterizedTest
     @CsvSource(value = {
+        "0,false,NONE",
+        "1,false,NONE",
         "2,true,NONE",
         "2,false,NONE",
         "3,false,FIVE",
@@ -19,7 +21,7 @@ class RankingTest {
         "5,true,TWO",
         "6, false, ONE"
     })
-    void from(int sameNumberCount, boolean hasSameBonusNumber, Ranking expect) {
+    void calculate(int sameNumberCount, boolean hasSameBonusNumber, Ranking expect) {
         // when
         Ranking ranking = Ranking.calculate(sameNumberCount, hasSameBonusNumber);
 
