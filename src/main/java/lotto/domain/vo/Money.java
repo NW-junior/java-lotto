@@ -22,4 +22,9 @@ public class Money {
                 String.format("구입 금액은 %d원 단위여야 합니다. 입력 금액 : %s ", MIN_MONEY_VALUE, value));
         }
     }
+
+    public int calculateLottoCount() {
+        return this.value / MIN_MONEY_VALUE;
+    }
+
 }
