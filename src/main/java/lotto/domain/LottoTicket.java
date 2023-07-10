@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,12 @@ public class LottoTicket {
             lottos.add(Lotto.publishRandomLotto());
         }
         return new LottoTicket(lottos);
+    }
+
+    public List<Ranking> calculateRankings(WinningLotto winningLotto) {
+        return lottos.stream()
+            .map(winningLotto::calculateRanking)
+            .collect(toUnmodifiableList());
     }
 
     public List<Lotto> getValue() {
