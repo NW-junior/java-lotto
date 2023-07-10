@@ -17,9 +17,9 @@ class WinningLotto {
         }
     }
 
-    public Ranking calculateRanking(Lotto lotto, LottoNumber bonusNumber) {
+    public Ranking calculateRanking(Lotto lotto) {
         int sameNumberCount = this.winningLottoNumbers.countSameNumber(lotto);
-        boolean hasBonusNumber = this.bonusNumber.equals(bonusNumber);
+        boolean hasBonusNumber = lotto.hasNumber(this.bonusNumber);
         return Ranking.calculate(sameNumberCount, hasBonusNumber);
     }
 }

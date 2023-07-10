@@ -38,6 +38,7 @@ public class WinningLottoTest {
             .isInstanceOf(IllegalArgumentException.class);
     }
 
+    // TODO : TC 케이스 더 추가해야함
     @DisplayName("로또와 보너스 번호를 받아 당첨 등수를 계산한다.")
     @Test
     void calculateRanking() {
@@ -47,10 +48,9 @@ public class WinningLottoTest {
         WinningLotto winningLotto = new WinningLotto(winningLottoNumbers, winningBonusNumber);
 
         Lotto lottoNumbers = new Lotto(createLottoNumbers(List.of(1, 2, 3, 4, 5, 6)));
-        LottoNumber bonusNumber = new LottoNumber(7);
 
         // when
-        Ranking ranking = winningLotto.calculateRanking(lottoNumbers, bonusNumber);
+        Ranking ranking = winningLotto.calculateRanking(lottoNumbers);
 
         // then
         assertThat(ranking).isEqualTo(ONE);
