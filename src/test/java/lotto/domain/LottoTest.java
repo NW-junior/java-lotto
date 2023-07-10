@@ -23,6 +23,17 @@ class LottoTest {
         assertThat(lotto).isNotNull();
     }
 
+    @DisplayName("랜덤한 로또를 발행한다.")
+    @Test
+    void publishLotto() {
+        // given
+        // when
+        Lotto lotto = Lotto.publishRandomLotto();
+
+        // then
+        assertThat(lotto).isNotNull();
+    }
+
     @DisplayName("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.")
     @Test
     void createLottoByOverSize() {
