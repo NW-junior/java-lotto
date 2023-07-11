@@ -2,7 +2,7 @@ package lotto.domain;
 
 import java.util.Arrays;
 
-enum Ranking {
+public enum Ranking {
     ONE(2_000_000_000, 6, false),
     TWO(30_000_000, 5, true),
     THREE(1_500_000, 5, false),
@@ -41,4 +41,15 @@ enum Ranking {
         return this.prize * count;
     }
 
+    public boolean isNotNone() {
+        return this != NONE;
+    }
+
+    public int getSameNumberCount() {
+        return sameNumberCount;
+    }
+
+    public int getPrize() {
+        return prize;
+    }
 }
