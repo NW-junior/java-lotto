@@ -67,7 +67,7 @@ class WinningResultTest {
         WinningResult winningResult = new WinningResult(rankings);
 
         // when
-        long totalPrize = winningResult.getTotalPrize();
+        long totalPrize = winningResult.calculateTotalPrize();
 
         // then
         assertThat(totalPrize).isEqualTo(expect);
