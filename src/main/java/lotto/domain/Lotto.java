@@ -46,14 +46,14 @@ public class Lotto {
         }
     }
 
-    public boolean hasNumber(LottoNumber bonusNumber) {
+    public boolean containsNumber(LottoNumber bonusNumber) {
         return numbers.stream()
             .anyMatch(lottoNumber -> lottoNumber.equals(bonusNumber));
     }
 
     public int countSameNumber(Lotto anotherLotto) {
         return (int)this.numbers.stream()
-            .filter(anotherLotto::hasNumber)
+            .filter(anotherLotto::containsNumber)
             .count();
     }
 
