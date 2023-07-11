@@ -14,6 +14,12 @@ public class WinningResult {
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
     }
 
+    public long getTotalPrize() {
+        return this.result.entrySet().stream()
+            .mapToLong(entry -> entry.getKey().calculatePrize(entry.getValue()))
+            .sum();
+    }
+
     public Map<Ranking, Long> getResult() {
         return this.result;
     }
