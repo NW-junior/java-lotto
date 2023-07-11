@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import lotto.domain.vo.Money;
+
 public class WinningResult {
 
     public final Map<Ranking, Long> result;
@@ -12,6 +14,11 @@ public class WinningResult {
     public WinningResult(List<Ranking> rankings) {
         this.result = rankings.stream()
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    public double getRateOfReturn(Money purchaseMoney) {
+        long totalPrize = calculateTotalPrize();
+        return purchaseMoney.calculateRateOfReturn(totalPrize);
     }
 
     long calculateTotalPrize() {
