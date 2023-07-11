@@ -50,4 +50,18 @@ class MoneyTest {
         assertThat(count).isEqualTo(5);
     }
 
+    @DisplayName("입력받은 금액을 기준으로 수익률을 계산한다.")
+    @Test
+    void calculateRateOfReturn() {
+        // given
+        Money purchaseMoney = new Money(1000);
+        long totalPrize = 10000;
+
+        // when
+        double result = purchaseMoney.calculateRateOfReturn(totalPrize);
+
+        // then
+        assertThat(result).isEqualTo(10.0);
+    }
+
 }

@@ -27,4 +27,8 @@ public class Money {
         return (int)(this.value / MIN_MONEY_VALUE);
     }
 
+    public double calculateRateOfReturn(long value) {
+        return (double)value / this.value;
+    }
+
 }
