@@ -54,14 +54,14 @@ class MoneyTest {
     @Test
     void calculateRateOfReturn() {
         // given
-        Money purchaseMoney = new Money(1000);
-        long totalPrize = 10000;
+        Money purchaseMoney = new Money(8000);
+        long totalPrize = 5000;
 
         // when
         double result = purchaseMoney.calculateRateOfReturn(totalPrize);
 
         // then
-        assertThat(result).isEqualTo(10.0);
+        assertThat(result).isEqualTo(62.5);
     }
 
 }

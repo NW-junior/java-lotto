@@ -3,6 +3,7 @@ package lotto.domain.vo;
 public class Money {
     private static final long MIN_MONEY_VALUE = 1_000L;
     private static final long VALID_SUBTRACT_VALUE = 0L;
+    private static final long PERCENT_VALUE = 100;
 
     private final long value;
 
@@ -28,7 +29,7 @@ public class Money {
     }
 
     public double calculateRateOfReturn(long value) {
-        return (double)value / this.value;
+        return (double)value / this.value * PERCENT_VALUE;
     }
 
 }
