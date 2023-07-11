@@ -1,31 +1,33 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.function.BiPredicate;
 
 enum Ranking {
-    ONE(2_000_000_000, (sameNumberCount, hasBonusNumber) -> sameNumberCount == 6),
-    TWO(30_000_000, (sameNumberCount, hasBonusNumber) -> sameNumberCount == 5 && hasBonusNumber),
-    THREE(1_500_000, (sameNumberCount, hasBonusNumber) -> sameNumberCount == 5 && !hasBonusNumber),
-    FOUR(50_000, (sameNumberCount, hasBonusNumber) -> sameNumberCount == 4),
-    FIVE(5_000, (sameNumberCount, hasBonusNumber) -> sameNumberCount == 3),
-    NONE(0, (sameNumberCount, hasBonusNumber) -> sameNumberCount < 3);
+    ONE(2_000_000_000, 6, false),
+    TWO(30_000_000, 5, true),
+    THREE(1_500_000, 5, false),
+    FOUR(50_000, 4, false),
+    FIVE(5_000, 3, false),
+    NONE(0, 0, false);
 
     public static final long MIN_COUNT_VALUE = 0L;
 
     private final int prize;
-    private final BiPredicate<Integer, Boolean> checkRanking;
+    private final int sameNumberCount;
+    private final boolean containsBonusNumber;
 
-    Ranking(int prize, BiPredicate<Integer, Boolean> rankPredicate) {
+    Ranking(int prize, int sameNumberCount, boolean containsBonusNumber) {
         this.prize = prize;
-        this.checkRanking = rankPredicate;
+        this.sameNumberCount = sameNumberCount;
+        this.containsBonusNumber = containsBonusNumber;
     }
 
-    public static Ranking calculate(int sameNumberCount, boolean hasSameBonusNumber) {
+    public static Ranking calculate(int sameNumberCount, boolean containsBonusNumber) {
         return Arrays.stream(Ranking.values())
-            .filter(ranking -> ranking.checkRanking.test(sameNumberCount, hasSameBonusNumber))
+            .filter(ranking -> ranking.sameNumberCount == sameNumberCount
+                && ranking.containsBonusNumber == containsBonusNumber)
             .findAny()
-            .orElseThrow(() -> new IllegalArgumentException("랭킹을 구할 수 없습니다."));
+            .orElse(Ranking.NONE);
     }
 
     private static void validateCount(Long count) {
