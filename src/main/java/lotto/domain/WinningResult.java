@@ -28,6 +28,6 @@ public class WinningResult {
     }
 
     public Map<Ranking, Long> getResult() {
-        return this.result;
+        return Map.copyOf(this.result);
     }
 }
