@@ -2,7 +2,7 @@ package lotto.domain;
 
 import lotto.domain.vo.LottoNumber;
 
-class WinningLotto {
+public class WinningLotto {
 
     private final Lotto winningLottoNumbers;
     private final LottoNumber bonusNumber;

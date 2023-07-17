@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -12,8 +13,12 @@ public class WinningResult {
     public final Map<Ranking, Long> result;
 
     public WinningResult(List<Ranking> rankings) {
-        this.result = rankings.stream()
+        Map<Ranking, Long> rankingMap = rankings.stream()
             .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        this.result = Arrays.stream(Ranking.values())
+            .filter(Ranking::isNotNone)
+            .collect(Collectors.toMap(Function.identity(), ranking -> rankingMap.getOrDefault(ranking, 0L)));
     }
 
     public double getRateOfReturn(Money purchaseMoney) {
@@ -23,6 +28,7 @@ public class WinningResult {
 
     long calculateTotalPrize() {
         return this.result.entrySet().stream()
+            .filter(entry -> entry.getValue() > 0)
             .mapToLong(entry -> entry.getKey().calculatePrize(entry.getValue()))
             .sum();
     }

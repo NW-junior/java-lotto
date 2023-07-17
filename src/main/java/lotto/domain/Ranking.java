@@ -52,4 +52,8 @@ public enum Ranking {
     public int getPrize() {
         return prize;
     }
+
+    public boolean isContainsBonusNumber() {
+        return containsBonusNumber;
+    }
 }

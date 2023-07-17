@@ -17,6 +17,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
+    // 랜덤 번호 뽑는거 인터페이스로 뽑는게 좀 더 유연할 것 같음...
     public static Lotto publishRandomLotto() {
         return new Lotto(LottoNumber.createRandomNumbers(LOTTO_NUMBERS_SIZE));
     }
