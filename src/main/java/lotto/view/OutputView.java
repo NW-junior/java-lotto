@@ -25,6 +25,7 @@ public class OutputView {
         for (Lotto lotto : lottos) {
             String lottoResult = lotto.getNumbers().stream()
                 .map(LottoNumber::getNumber)
+                .sorted()
                 .map(String::valueOf)
                 .collect(Collectors.joining(", "));
             System.out.println("[" + lottoResult + "]");
