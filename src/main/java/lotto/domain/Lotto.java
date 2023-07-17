@@ -18,6 +18,8 @@ public class Lotto {
     }
 
     // 랜덤 번호 뽑는거 인터페이스로 뽑는게 좀 더 유연할 것 같음...
+    // static이라 불가능해 보이는데 밖에서 그냥 주입해서 하는게 더 좋을려나?
+    // 테스트가 힘들어보임!
     public static Lotto publishRandomLotto() {
         return new Lotto(LottoNumber.createRandomNumbers(LOTTO_NUMBERS_SIZE));
     }
