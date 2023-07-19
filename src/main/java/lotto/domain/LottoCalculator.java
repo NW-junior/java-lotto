@@ -1,0 +1,35 @@
+package lotto.domain;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import lotto.model.Reward;
+
+public class LottoCalculator {
+
+    private static Integer PERCENTAGE = 100;
+    private Map<Reward, Integer> rewardInfos;
+
+    public Map<Reward, Integer> getRewardInfos() {
+        return rewardInfos;
+    }
+
+    public BigDecimal calculateEarningRate(BigDecimal investedCoin, List<Reward> rewardList) {
+        rewardInfos = rewardList.stream()
+                .filter(Reward::isDisplayed)
+                .collect(Collectors.groupingBy(e -> e, Collectors.summingInt(e -> 1)));
+
+        for (Reward r : Reward.values()) {
+            rewardInfos.putIfAbsent(r, 0);
+        }
+
+        BigDecimal rewardedCoin = rewardList.stream()
+                .map(Reward::getPrizeWon)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        return rewardedCoin.multiply(new BigDecimal(PERCENTAGE))
+                .divide(investedCoin, 1, RoundingMode.HALF_UP);
+    }
+}

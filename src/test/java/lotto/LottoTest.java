@@ -1,11 +1,13 @@
 package lotto;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import lotto.model.Lotto;
+import lotto.model.Reward;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 class LottoTest {
     @DisplayName("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.")
@@ -23,5 +25,15 @@ class LottoTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-    // 아래에 추가 테스트 작성 가능
+    @DisplayName("로또 번호와 럭키 넘버가 제공됐을 때 올바른 등수를 반환한다.")
+    @Test
+    void returnCorrectRank() {
+        Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 7));
+        List<Integer> luckyNumber = List.of(1, 2, 3, 4, 5, 6);
+
+        Reward result = lotto.draw(luckyNumber, 7);
+
+        assertEquals(result, Reward.SECOND);
+    }
+
 }
