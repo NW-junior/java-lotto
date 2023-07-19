@@ -1,9 +1,6 @@
 package lotto;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
-import static lotto.LottoConstants.LOTTO_LAST_NUMBER;
 import static lotto.LottoConstants.LOTTO_PRICE;
-import static lotto.LottoConstants.LOTTO_START_NUMBER;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.math.BigDecimal;
@@ -34,8 +31,6 @@ public class UserInterface {
 
         luckyNumberList = parseInputToInteger(List.of(numberInput.split(",")));
 
-        validateLuckyNumber(luckyNumberList);
-
         return luckyNumberList;
     }
 
@@ -45,8 +40,6 @@ public class UserInterface {
         String bonusInput = Console.readLine();
 
         Integer bonusNumber = parseInputToInteger(List.of(bonusInput)).get(0);
-
-        validateBonusNumber(bonusNumber);
 
         return bonusNumber;
     }
@@ -95,30 +88,4 @@ public class UserInterface {
             throw new IllegalArgumentException("입력 금액은 천원 단위여야 합니다.");
         }
     }
-
-    private void validateBonusNumber(Integer bonusNumber) {
-        if (bonusNumber < LOTTO_START_NUMBER || bonusNumber > LOTTO_LAST_NUMBER) {
-            throw new IllegalArgumentException("당첨 번호는 1과 45 사이의 수만 올 수 있습니다.");
-        }
-
-        if (luckyNumberList.contains(bonusNumber)) {
-            throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
-        }
-    }
-
-    private void validateLuckyNumber(List<Integer> luckyNumber) {
-        long wrongNumberCount = luckyNumber.stream().filter(it -> it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER)
-                .count();
-
-        if (wrongNumberCount != 0) {
-            throw new IllegalArgumentException("당첨 번호는 1과 45 사이의 수만 올 수 있습니다.");
-        }
-
-        List<Integer> districtList = luckyNumber.stream().distinct().collect(Collectors.toList());
-
-        if (districtList.size() != luckyNumber.size()) {
-            throw new IllegalArgumentException("당첨 번호에는 중복된 수가 있을 수 없습니다.");
-        }
-    }
-
 }
