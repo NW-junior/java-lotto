@@ -9,4 +9,8 @@ public class LottoConstants {
 
     public static BigDecimal LOTTO_PRICE = new BigDecimal(1000L);
 
+    public static String LOTTO_INFO_START_CHAR = "[";
+    public static String LOTTO_INFO_END_CHAR = "]";
+    public static String LOTTO_INFO_DELIMITER = ", ";
+
 }

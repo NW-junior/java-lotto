@@ -7,6 +7,7 @@ import lotto.domain.LottoCalculator;
 import lotto.domain.LottoDrawer;
 import lotto.model.Lotto;
 import lotto.model.Reward;
+import lotto.model.WinningLotto;
 import lotto.view.UserInterface;
 
 public class Application {
@@ -16,15 +17,17 @@ public class Application {
         LottoCalculator lottoCalculator = new LottoCalculator();
 
         BigDecimal investedCoin = ui.getMoneyInput();
-        List<Lotto> lottoList = lottoDrawer.draw(investedCoin);
-        ui.printBoughtLotto(lottoList);
+        List<Lotto> drawnLotteries = lottoDrawer.draw(investedCoin);
+        ui.printBoughtLotto(drawnLotteries);
 
-        List<Integer> luckyNumbers = ui.getLuckyNumbers();
+        Lotto winningNumbers = new Lotto(ui.getLuckyNumbers());
         Integer bonusNumber = ui.getBonusNumber();
-        List<Reward> rewardList = lottoDrawer.scratch(luckyNumbers, bonusNumber);
+        WinningLotto winningLotto = new WinningLotto(winningNumbers, bonusNumber);
 
+        List<Reward> rewardList = lottoDrawer.calculateReward(winningLotto, drawnLotteries);
         BigDecimal earningRate = lottoCalculator.calculateEarningRate(investedCoin, rewardList);
         Map<Reward, Integer> rewardInfoMap = lottoCalculator.getRewardInfos();
+        
         ui.printResult(rewardInfoMap, earningRate);
     }
 }

@@ -1,5 +1,8 @@
 package lotto.view;
 
+import static lotto.common.LottoConstants.LOTTO_INFO_DELIMITER;
+import static lotto.common.LottoConstants.LOTTO_INFO_END_CHAR;
+import static lotto.common.LottoConstants.LOTTO_INFO_START_CHAR;
 import static lotto.common.LottoConstants.LOTTO_PRICE;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -11,8 +14,6 @@ import lotto.model.Lotto;
 import lotto.model.Reward;
 
 public class UserInterface {
-
-    private List<Integer> luckyNumberList;
 
     public BigDecimal getMoneyInput() {
         System.out.println("구입금액을 입력해 주세요.");
@@ -31,9 +32,7 @@ public class UserInterface {
 
         String numberInput = Console.readLine();
 
-        luckyNumberList = parseInputToInteger(List.of(numberInput.split(",")));
-
-        return luckyNumberList;
+        return parseInputToInteger(List.of(numberInput.split(",")));
     }
 
     public Integer getBonusNumber() {
@@ -41,16 +40,22 @@ public class UserInterface {
 
         String bonusInput = Console.readLine();
 
-        Integer bonusNumber = parseInputToInteger(List.of(bonusInput)).get(0);
-
-        return bonusNumber;
+        return parseInputToInteger(List.of(bonusInput)).get(0);
     }
 
     public void printBoughtLotto(List<Lotto> lottoList) {
         System.out.printf("%n%s개를 구매했습니다.%n%n", lottoList.size());
+        StringBuilder lotteryPrinter = new StringBuilder();
 
         for (Lotto lotto : lottoList) {
-            System.out.println(lotto);
+            List<String> stringNumberList = lotto.getNumbersByString();
+
+            lotteryPrinter.append(LOTTO_INFO_START_CHAR);
+            lotteryPrinter.append(String.join(LOTTO_INFO_DELIMITER, stringNumberList));
+            lotteryPrinter.append(LOTTO_INFO_END_CHAR);
+
+            System.out.println(lotteryPrinter);
+            lotteryPrinter.delete(0, lotteryPrinter.length());
         }
     }
 
@@ -58,9 +63,7 @@ public class UserInterface {
         System.out.println("\n당첨 통계");
         System.out.println("---");
         rewardInfo.keySet().forEach(
-                (reward) -> {
-                    System.out.printf("%s - %d개%n", reward, rewardInfo.get(reward));
-                }
+                reward -> System.out.printf("%s - %d개%n", reward, rewardInfo.get(reward))
         );
         System.out.printf("총 수익률은 %s%%입니다.%n", earningRate);
     }
@@ -68,8 +71,8 @@ public class UserInterface {
     private BigDecimal parseInputToMoney(String moneyInput) {
         try {
             return new BigDecimal(moneyInput);
-        } catch (IllegalArgumentException e) {
-            throw e;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 입력 금액은 숫자여야 합니다.");
         }
     }
 
@@ -78,8 +81,8 @@ public class UserInterface {
             return numberInputList.stream()
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
-        } catch (IllegalArgumentException e) {
-            throw e;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("[ERROR] 행운 번호는 숫자여야 합니다.");
         }
     }
 
@@ -87,7 +90,7 @@ public class UserInterface {
         BigDecimal reminder = investedCoin.remainder(LOTTO_PRICE);
 
         if (!reminder.equals(BigDecimal.ZERO)) {
-            throw new IllegalArgumentException("입력 금액은 천원 단위여야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 입력 금액은 천원 단위여야 합니다.");
         }
     }
 }

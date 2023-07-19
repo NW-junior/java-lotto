@@ -15,15 +15,6 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public Reward draw(List<Integer> luckyNumber, Integer bonusNumber) {
-        int correctCount = Math.toIntExact(numbers.stream()
-                .filter(luckyNumber::contains)
-                .count());
-        boolean hasBonus = numbers.contains(bonusNumber);
-
-        return Reward.getRewardByCorrectCount(correctCount, hasBonus);
-    }
-
     private void validate(List<Integer> numbers) {
         validateLottoSize(numbers);
         validateWrongNumber(numbers);
@@ -57,5 +48,11 @@ public class Lotto {
         if (wrongNumberExist) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호는 1과 45 사이의 수만 올 수 있습니다.");
         }
+    }
+
+    public List<String> getNumbersByString() {
+        return numbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.toList());
     }
 }

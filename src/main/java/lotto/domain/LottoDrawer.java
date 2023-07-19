@@ -9,20 +9,19 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import lotto.model.Lotto;
 import lotto.model.Reward;
+import lotto.model.WinningLotto;
 
 public class LottoDrawer {
 
-    private final List<Lotto> drawnLottoList = new ArrayList<>();
-
     public List<Lotto> draw(BigDecimal insertedCoin) {
         int certainTimes = Integer.parseInt(insertedCoin.divide(LOTTO_PRICE).toString());
+        List<Lotto> drawnLottoList = new ArrayList<>();
 
         for (int i = 0; i < certainTimes; i++) {
-            List<Integer> generatedNumber = Randoms.pickUniqueNumbersInRange(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER,
-                    LOTTO_SIZE);
+            List<Integer> generatedNumber = Randoms
+                    .pickUniqueNumbersInRange(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER, LOTTO_SIZE);
 
             Lotto lotto = new Lotto(generatedNumber);
 
@@ -32,9 +31,7 @@ public class LottoDrawer {
         return drawnLottoList;
     }
 
-    public List<Reward> scratch(List<Integer> luckyNumbers, Integer bonusNumber) {
-        return drawnLottoList.stream()
-                .map(lotto -> lotto.draw(luckyNumbers, bonusNumber))
-                .collect(Collectors.toList());
+    public List<Reward> calculateReward(WinningLotto winningLotto, List<Lotto> drawnLotteries) {
+        return winningLotto.calculateReward(drawnLotteries);
     }
 }
