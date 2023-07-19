@@ -1,4 +1,4 @@
-package lotto;
+package lotto.model;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -9,8 +9,7 @@ public enum Reward {
     THIRD(5, new BigDecimal("1500000"), "1,500,000", false),
     FOURTH(4, new BigDecimal("50000"), "50,000", false),
     FIFTH(3, new BigDecimal("5000"), "5,000", false),
-    FAIL(0, new BigDecimal("0"), "0", false);
-    ;
+    FAIL(0, new BigDecimal("0"), "0", false);;
     private int correctCount;
     private BigDecimal prizeWon;
     private String displayMoney;

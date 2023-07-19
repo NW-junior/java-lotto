@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.List;
+import lotto.domain.LottoCalculator;
+import lotto.model.Reward;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

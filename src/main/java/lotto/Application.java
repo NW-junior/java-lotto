@@ -3,6 +3,11 @@ package lotto;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import lotto.domain.LottoCalculator;
+import lotto.domain.LottoDrawer;
+import lotto.model.Lotto;
+import lotto.model.Reward;
+import lotto.view.UserInterface;
 
 public class Application {
     public static void main(String[] args) {

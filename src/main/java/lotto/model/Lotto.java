@@ -1,8 +1,8 @@
-package lotto;
+package lotto.model;
 
-import static lotto.LottoConstants.LOTTO_LAST_NUMBER;
-import static lotto.LottoConstants.LOTTO_SIZE;
-import static lotto.LottoConstants.LOTTO_START_NUMBER;
+import static lotto.common.LottoConstants.LOTTO_LAST_NUMBER;
+import static lotto.common.LottoConstants.LOTTO_SIZE;
+import static lotto.common.LottoConstants.LOTTO_START_NUMBER;
 
 import java.util.List;
 import java.util.stream.Collectors;

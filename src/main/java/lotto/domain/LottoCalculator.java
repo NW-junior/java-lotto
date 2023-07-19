@@ -1,15 +1,16 @@
-package lotto;
+package lotto.domain;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.model.Reward;
 
 public class LottoCalculator {
 
-    private Map<Reward, Integer> rewardInfos;
     private static Integer PERCENTAGE = 100;
+    private Map<Reward, Integer> rewardInfos;
 
     public Map<Reward, Integer> getRewardInfos() {
         return rewardInfos;

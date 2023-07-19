@@ -1,12 +1,14 @@
-package lotto;
+package lotto.view;
 
-import static lotto.LottoConstants.LOTTO_PRICE;
+import static lotto.common.LottoConstants.LOTTO_PRICE;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import lotto.model.Lotto;
+import lotto.model.Reward;
 
 public class UserInterface {
 
