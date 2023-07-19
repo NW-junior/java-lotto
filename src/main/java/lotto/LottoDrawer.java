@@ -1,5 +1,10 @@
 package lotto;
 
+import static lotto.LottoConstants.LOTTO_LAST_NUMBER;
+import static lotto.LottoConstants.LOTTO_PRICE;
+import static lotto.LottoConstants.LOTTO_SIZE;
+import static lotto.LottoConstants.LOTTO_START_NUMBER;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +16,10 @@ public class LottoDrawer {
     private final List<Lotto> drawnLottoList = new ArrayList<>();
 
     public List<Lotto> draw(BigDecimal insertedCoin) {
-        int certainTimes = Integer.parseInt(insertedCoin.divide(BigDecimal.valueOf(1000)).toString());
+        int certainTimes = Integer.parseInt(insertedCoin.divide(LOTTO_PRICE).toString());
 
         for (int i = 0; i < certainTimes; i++) {
-            List<Integer> generatedNumber = Randoms.pickUniqueNumbersInRange(1, 45, 6);
+            List<Integer> generatedNumber = Randoms.pickUniqueNumbersInRange(LOTTO_START_NUMBER, LOTTO_LAST_NUMBER, LOTTO_SIZE);
 
             Lotto lotto = new Lotto(generatedNumber);
 

@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class LottoCalculator {
 
     private Map<Reward, Integer> rewardInfos;
+    private static Integer PERCENTAGE = 100;
 
     public Map<Reward, Integer> getRewardInfos() {
         return rewardInfos;
@@ -27,7 +28,7 @@ public class LottoCalculator {
                 .map(Reward::getPrizeWon)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        return rewardedCoin.multiply(new BigDecimal(100))
+        return rewardedCoin.multiply(new BigDecimal(PERCENTAGE))
                 .divide(investedCoin, 1, RoundingMode.HALF_UP);
     }
 }

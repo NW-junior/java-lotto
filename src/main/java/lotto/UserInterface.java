@@ -1,6 +1,9 @@
 package lotto;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
+import static lotto.LottoConstants.LOTTO_LAST_NUMBER;
+import static lotto.LottoConstants.LOTTO_PRICE;
+import static lotto.LottoConstants.LOTTO_START_NUMBER;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.math.BigDecimal;
@@ -86,7 +89,7 @@ public class UserInterface {
     }
 
     private void validateInvestedCoin(BigDecimal investedCoin) {
-        BigDecimal reminder = investedCoin.remainder(new BigDecimal(1000));
+        BigDecimal reminder = investedCoin.remainder(LOTTO_PRICE);
 
         if (!reminder.equals(BigDecimal.ZERO)) {
             throw new IllegalArgumentException("입력 금액은 천원 단위여야 합니다.");
@@ -94,7 +97,7 @@ public class UserInterface {
     }
 
     private void validateBonusNumber(Integer bonusNumber) {
-        if (bonusNumber <= 0 || bonusNumber > 45) {
+        if (bonusNumber < LOTTO_START_NUMBER || bonusNumber > LOTTO_LAST_NUMBER) {
             throw new IllegalArgumentException("당첨 번호는 1과 45 사이의 수만 올 수 있습니다.");
         }
 
@@ -104,7 +107,7 @@ public class UserInterface {
     }
 
     private void validateLuckyNumber(List<Integer> luckyNumber) {
-        long wrongNumberCount = luckyNumber.stream().filter(it -> it <= 0 || it > 45)
+        long wrongNumberCount = luckyNumber.stream().filter(it -> it < LOTTO_START_NUMBER || it > LOTTO_LAST_NUMBER)
                 .count();
 
         if (wrongNumberCount != 0) {
